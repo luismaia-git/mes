@@ -5,12 +5,11 @@ import spoon.SpoonAPI;
 import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtType;
+import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.TypeFilter;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class QuestionThree {
     public static void main(String[] args) {
@@ -22,12 +21,26 @@ public class QuestionThree {
 
         CtModel model = spoon.getModel();
 
-        for (CtClass<?> ctClass : model.getElements(new TypeFilter<>(CtClass.class))) {
-            Set<String> methods = adjacencyList.computeIfAbsent(ctClass.getSimpleName(), k -> new HashSet<>());
+        //obtendo todos os tipos
+        Collection<CtType<?>> types = model.getAllTypes();
+        for(CtType<?> type : types) {
+            String typeName = type.getQualifiedName();
+            Set<String> referencedTypes = new HashSet<>();
 
-            for (CtMethod<?> ctMethod : ctClass.getMethods()) {
+            if (!type.isShadow()) {
+                for (CtTypeReference<?> referredType : type.getReferencedTypes()) {
 
-                methods.add(ctMethod.getSimpleName());
+
+                    if (!referredType.isShadow()) {
+
+                        if (!referredType.getQualifiedName().equals(typeName)) {
+                            referencedTypes.add(referredType.getQualifiedName());
+                        }
+                    }
+
+
+                }
+                adjacencyList.put(typeName, referencedTypes);
             }
         }
 

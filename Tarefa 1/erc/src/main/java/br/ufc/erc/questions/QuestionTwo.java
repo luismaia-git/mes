@@ -3,6 +3,7 @@ package br.ufc.erc.questions;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.CtModel;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtTypeReference;
@@ -27,6 +28,7 @@ public class QuestionTwo {
             String typeName = type.getQualifiedName();
             Set<String> referencedTypes = new HashSet<>();
             if (!type.isShadow()) {
+
                 for (CtElement referredTypeCtElement : type.getDirectChildren()) {
                     for (CtTypeReference<?> referredType : referredTypeCtElement.getReferencedTypes()) {
                         if (!referredType.isShadow()) {
@@ -34,17 +36,19 @@ public class QuestionTwo {
                                 referencedTypes.add(referredType.getQualifiedName());
                             }
                         }
+                    }
                 }
+
                 adjacencyList.put(typeName, referencedTypes);
             }
         }
 
             for (Map.Entry<String, Set<String>> entry : adjacencyList.entrySet()) {
                 System.out.println("Tipos: " + entry.getKey());
-                System.out.println("Herança : " + entry.getValue());
+                System.out.println("Herda de : " + entry.getValue());
                 System.out.println();
             }
         }
 
     }
-}
+

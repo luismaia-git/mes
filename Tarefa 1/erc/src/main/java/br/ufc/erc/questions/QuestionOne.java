@@ -4,6 +4,7 @@ import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.TypeFilter;
 
@@ -25,8 +26,10 @@ public class QuestionOne {
         for(CtType<?> type : types) {
             String typeName = type.getQualifiedName();
             Set<String> referencedTypes = new HashSet<>();
+
             if (!type.isShadow()) {
                 for (CtTypeReference<?> referredType : type.getReferencedTypes()) {
+
                     if (!referredType.isShadow()) {
                         if (!referredType.getQualifiedName().equals(typeName)) {
                             referencedTypes.add(referredType.getQualifiedName());
