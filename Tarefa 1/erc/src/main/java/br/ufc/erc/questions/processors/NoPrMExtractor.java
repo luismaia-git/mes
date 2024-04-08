@@ -14,6 +14,6 @@ public class NoPrMExtractor extends AbstractProcessor<CtType<?>> {
             }
 
         }
-        System.out.printf("Tipo em analise: %s ; Numero de metodos privados: %d \n", element.getQualifiedName(), count);
+        System.out.printf("Tipo em análise: %s ; Numero de metodos privados: %d \n", element.getQualifiedName(), count);
     }
 }

@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class FanInExtractor extends AbstractProcessor<CtType<?>> {
+public class FanInExtractor extends AbstractProcessor<CtType<?>>  {
     @Override
     public void process(CtType<?> element) {
 
@@ -34,8 +34,9 @@ public class FanInExtractor extends AbstractProcessor<CtType<?>> {
                 }
             }
         }
-        System.out.printf("Tipo em analise: %s . Numero de tipos que o referenciam: %d \n", elementTypeName, count);
 
+        System.out.printf("Tipo em análise: %s ;  Numero de tipos que o referenciam: %d \n", elementTypeName, count);
     }
+
 }
 

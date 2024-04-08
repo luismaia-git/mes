@@ -11,6 +11,6 @@ public class NoDMExtractor extends AbstractProcessor<CtType<?>> {
         for (CtMethod<?> method : element.getMethods()) {
             count = count + 1;
         }
-        System.out.printf("Tipo em analise: %s . Numero de metodos: %d \n", element.getQualifiedName(), count);
+        System.out.printf("Tipo em análise: %s ; Numero de métodos: %d \n", element.getQualifiedName(), count);
     }
 }

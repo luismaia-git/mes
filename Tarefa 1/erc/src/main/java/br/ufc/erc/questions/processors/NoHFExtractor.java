@@ -10,7 +10,7 @@ public class NoHFExtractor extends AbstractProcessor<CtType<?>> {
         CtTypeReference<?> classe = element.getSuperclass();
         if(classe != null){
             int t = getNumberFields(classe);
-            System.out.printf("Tipo: %s; Numero de atributos herdados: %d \n ", element.getQualifiedName(), t );
+            System.out.printf("Tipo em análise: %s; Numero de atributos herdados: %d \n ", element.getQualifiedName(), t );
         }
     }
     public int getNumberFields(CtTypeReference<?> element){

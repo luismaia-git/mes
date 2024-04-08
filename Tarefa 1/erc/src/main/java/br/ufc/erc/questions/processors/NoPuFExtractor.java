@@ -14,6 +14,6 @@ public class NoPuFExtractor extends AbstractProcessor<CtType<?>> {
                 count = count + 1;
             }
         }
-        System.out.printf("Tipo em analise: %s ; Numero de atributos publicos: %d \n", element.getQualifiedName(), count);
+        System.out.printf("Tipo em análise: %s ; Numero de atributos publicos: %d \n", element.getQualifiedName(), count);
     }
 }

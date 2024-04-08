@@ -24,7 +24,7 @@ public class FanOutExtractor extends AbstractProcessor<CtType<?>> {
                 }
             }
         }
-        System.out.printf("Tipo em analise: %s . Numero de tipos referenciados: %d \n", typeName, count);
+        System.out.printf("Tipo em análise: %s ; Numero de tipos referenciados: %d \n", typeName, count);
 
     }
 }

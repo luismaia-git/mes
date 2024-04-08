@@ -11,7 +11,7 @@ public class NoHMExtractor extends AbstractProcessor<CtType<?>> {
         CtTypeReference<?> classe = element.getSuperclass();
         if(classe != null){
             int t = getNumberMethods(classe);
-            System.out.printf("Tipo: %s; Numero de metodos herdados: %d \n ", element.getQualifiedName(), t );
+            System.out.printf("Tipo em analise: %s; Numero de métodos herdados: %d \n ", element.getQualifiedName(), t );
         }
     }
     public int getNumberMethods(CtTypeReference<?> element){

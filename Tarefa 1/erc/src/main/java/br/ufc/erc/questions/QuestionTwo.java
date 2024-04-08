@@ -21,34 +21,41 @@ public class QuestionTwo {
         HashMap<String, Set<String>> adjacencyList = new HashMap<>();
 
         CtModel model = spoon.getModel();
+        HashMap<String, Set<String>> adjacenceList = new HashMap<>();
 
-        //obtendo todos os tipos
-        Collection<CtType<?>> types = model.getAllTypes();
-        for(CtType<?> type : types) {
-            String typeName = type.getQualifiedName();
-            Set<String> referencedTypes = new HashSet<>();
-            if (!type.isShadow()) {
 
-                for (CtElement referredTypeCtElement : type.getDirectChildren()) {
-                    for (CtTypeReference<?> referredType : referredTypeCtElement.getReferencedTypes()) {
-                        if (!referredType.isShadow()) {
-                            if (!referredType.getQualifiedName().equals(typeName)) {
-                                referencedTypes.add(referredType.getQualifiedName());
-                            }
-                        }
+        Collection<CtType<?>> allTypes = model.getAllTypes();
+        for (CtType<?> typeAnalised : allTypes) {
+            if (!typeAnalised.isShadow()) {
+                Set<String> typeHeritage = new HashSet<>();
+                for (CtType<?> typeSearch : allTypes) {
+                    if (!typeAnalised.getQualifiedName().equals(typeSearch.getQualifiedName())) {
+                        herda(typeAnalised.getQualifiedName(), typeSearch.getQualifiedName(),
+                                typeSearch.getSuperclass(), typeHeritage);
                     }
                 }
-
-                adjacencyList.put(typeName, referencedTypes);
+                adjacenceList.put(typeAnalised.getQualifiedName(), typeHeritage);
             }
+
         }
 
             for (Map.Entry<String, Set<String>> entry : adjacencyList.entrySet()) {
-                System.out.println("Tipos: " + entry.getKey());
-                System.out.println("Herda de : " + entry.getValue());
+                System.out.println("Tipo: " + entry.getKey());
+                System.out.println("Herança: " + entry.getValue());
                 System.out.println();
             }
         }
+
+    static void herda(String typeQualified, String typeSearch, CtTypeReference<?> typeParent,
+                         Set<String> typeHeritage) {
+        if (typeParent == null)
+            return;
+        if (typeQualified.equals(typeParent.getQualifiedName())) {
+            typeHeritage.add(typeSearch);
+            return;
+        }
+
+        herda(typeQualified, typeSearch, typeParent.getSuperclass(), typeHeritage);}
 
     }
 
